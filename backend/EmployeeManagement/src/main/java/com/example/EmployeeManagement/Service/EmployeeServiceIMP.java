@@ -5,6 +5,7 @@ import com.example.EmployeeManagement.Entity.Employee;
 import com.example.EmployeeManagement.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -12,6 +13,7 @@ public class EmployeeServiceIMP implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepo;
+    @Transactional
     @Override
     public String addEmployee(EmployeeSaveData employeeSavaData) {
         Employee employee = new Employee(
@@ -21,6 +23,6 @@ public class EmployeeServiceIMP implements EmployeeService {
         );
         employeeRepo.save(employee);
 
-        return employeeSavaData.toString();
+        return employee.getName();
     }
 }
